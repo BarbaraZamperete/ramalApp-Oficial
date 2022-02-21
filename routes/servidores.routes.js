@@ -3,7 +3,6 @@ const {
 } = require('express');
 const router = Router();
 const sequelize = require('sequelize');
-const db = require('../models/index')
 
 const { Setor, RamalF, Pessoa, RamalV} = require('../models/associations')
 
