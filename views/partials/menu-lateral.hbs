@@ -1,0 +1,50 @@
+<div class="menu-lateral">
+  <div class="flex-row filtrar-titulo">
+    <span class="material-icons">&#xe152;</span>
+    <h2>Filtrar resultados</h2>
+  </div>
+  <form action="/ramais/filtro" method="post" class="flex-column">
+    {{!-- {{#if userAdm}} --}}
+    <label for="disponibilidade">Disponibilidade</label>
+    <select name="disponibilidade" id="disponibilidade">
+      <option value="null">Qualquer</option>
+      <option value="1" id="1">Livre</option>
+      <option value="0" id="0">Ocupado</option>
+    </select>
+    <label for="tipo">Tipo de Ramal</label>
+    <select name="tipo" id="tipo">
+      <option value="null">Qualquer</option>
+      <option value="analogico" id="analogico">Analógico</option>
+      <option value="digital" id="digital">Digital</option>
+      <option value="virtual" id="virtual">Virtual</option>
+      <option value="ip" id="ip">IP</option>
+    </select>
+    {{!-- {{/if}} --}}
+    <label for="setor">Setor:</label>
+    <select name="setor" id="">
+        <option value="null">Qualquer</option>
+        {{#each setor}}
+        <option value="{{setor}}">{{setor}}</option>
+        {{/each}}
+    </select>
+    <label for="servidor">Nome:</label>
+    <input type="search" name="servidor" id="" />
+    <label for="matricula">Matricula:</label>
+    <input type="search" name="matricula" id="" />
+    <label for="ramal">Número:</label>
+    <input type="search" name="ramal" id="" />
+    <input type="submit" value="Filtrar" />
+  </form>
+</div>
+{{#if tipo}}
+  <script>
+    const campoTipo = document.getElementById("{{tipo}}");
+    campoTipo.setAttribute("selected", "true");
+  </script>
+{{/if}}
+{{#if disponibilidade}}
+  <script>
+    const campoDisponibilidade = document.getElementById("{{disponibilidade}}");
+    campoDisponibilidade.setAttribute("selected", "true");
+  </script>
+{{/if}}

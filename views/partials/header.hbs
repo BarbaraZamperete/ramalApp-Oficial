@@ -1,0 +1,17 @@
+<div class="header">
+  <div class="margin-container flex-row">
+    <div class="image-logo"></div>
+    <div class="titulo-box flex-column">
+        <h2>Controle de Ramal</h2>
+    </div>
+    <div class="menu-pop-up flex-row">
+        {{#if user}}
+        <h3>{{user.nome}}</h3>
+        <span class="material-icons">&#xe5d2;</span>
+        {{else}}
+        <a href="/login"><h3>Entrar</h3></a>
+        <span class="material-icons">&#xe7fd;</span>
+        {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container flex-column">
+  <div class="tipos flex-row">
+    <div class="tipo tipo-ativo" id="fisico">Físico</div>
+    <div class="tipo" id="virtual">Virtual</div>
+  </div>
+  <div class="ramal-form ramal-form-ativo" id="fisico-container">
+    <form action="#" method="post" class="flex-column">
+      <div class="form-area flex-row">
+        <div class="metade-form flex-column">
+          <label for="numero">Número:</label>
+          <input type="text" name="numero" />
+          <label for="servidor">Setor:</label>
+          <input type="text" name="nome-servidor" />
+          <label for="modelo">Modelo de Ramal:</label>
+          <select name="modelo" id="modelo">
+            <option value="digital">Ramal Digital</option>
+            <option value="ip">Ramal IP</option>
+            <option value="analógico">Ramal Analógico</option>
+          </select>
+          <div class="rack-loc flex-row" id="rack">
+            <div class="metade-rack flex-column">
+              <label for="bastidor">Bastidor</label>
+              <input type="number" min="0" max="4" name="bastidor" />
+            </div>
+            <div class="metade-rack flex-column">
+              <label for="slot">Slot</label>
+              <input type="number" min="0" max="8" name="slot" />
+            </div>
+            <div class="metade-rack flex-column">
+              <label for="terminacao">Terminação</label>
+              <input type="number" min="0" max="16" name="terminacao" />
+            </div>
+          </div>
+        </div>
+        <div class="metade-form flex-column">
+          <label for="grupo">Grupo de Captura:</label>
+          <input type="text" name="grupo" />
+          <label for="categoria">Categoria:</label>
+          <input type="number" name="categoria" />
+          <label for="observacao">Observações:</label>
+          <textarea name="observacao" id="" cols="30" rows="2"></textarea>
+        </div>
+      </div>
+      <input type="submit" value="ALOCAR" />
+    </form>
+  </div>
+  <div class="ramal-form" id="virtual-container">
+    <form action="#" method="post" class="flex-column">
+      <label for="numero">Número:</label>
+      <input type="text" name="numero" />
+      <label for="servidor">Servidor:</label>
+      <input type="text" name="nome-servidor" />
+      <label for="senha">Senha do Ramal:</label>
+      <input type="password" name="senha" />
+      <label for="senha-verify">Repitir a senha:</label>
+      <input type="password" name="senha-verify" />
+      <input type="submit" value="ALOCAR" />
+    </form>
+  </div>
+</div>
+
+<script src="/alocar-ramal.js" type="text/javascript"></script>

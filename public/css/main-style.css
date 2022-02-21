@@ -1,0 +1,94 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+  /* GLOBAL CLASSES*/
+  
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+}
+.margin-container{
+    max-width: 1650px;
+    min-width: 1080px;
+    margin: auto;
+    height: 100%;
+
+    /* justify-content: space-around; */
+}
+.hide{
+    display: none;
+}
+.active{
+    border-bottom: 4px solid white;
+    height: 100%;
+}
+
+
+
+
+/*HOME STYLE*/
+.home-container{
+    display: flex;
+}
+.ramais-container{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    margin: 30px auto;
+    flex-wrap: wrap;
+    min-height: 700px;
+    /* margin-left: 310px; */
+    border-radius: 10px;
+    /* background-color: whitesmoke; */
+}
+
+
+.ramal-container{
+    display: flex;
+    align-items: center;
+    color: white;
+    width: 90px;
+    height: 40px;
+    border-radius: 7px;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.ramal-container h2{
+    margin: 0px;
+    font-weight: 400;
+    margin-left: 2px;
+}
+.ocupado-fisico{
+    background-color: rgb(32, 71, 32);
+}
+.livre-fisico{
+    background-color: white;
+    border: 4px solid rgb(32, 71, 32);
+    color: rgb(32, 71, 32);
+    
+}
+.ocupado-virtual{
+    background-color: #1e4072;
+}
+.livre-virtual{
+    background-color: white;
+    border: 4px solid #1e4072;
+    color: #1e4072;
+    
+}

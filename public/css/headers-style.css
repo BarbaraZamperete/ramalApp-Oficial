@@ -1,0 +1,96 @@
+/* HEADER PRINCIPAL*/
+
+.header {
+    background-color: #1e4072;
+    width: 100%;
+    height: 100px;
+}
+
+.image-logo {
+    width: 100px;
+    height: 85px;
+    /* background-color: red; */
+    background-image: url("/img/brasaoPF.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex: 0.3;
+}
+
+.titulo-box{
+    /* background-color: aqua; */
+    width: 40%;
+    height: 90%;
+    font-size: 35px;
+    color: white;
+    flex: 0.7;
+}
+.titulo-box h2{
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.menu-pop-up{
+    width: 100px;
+    flex: 0.3;
+    /* background-color: red; */
+    color: white;
+}
+.menu-pop-up a{
+    text-decoration: none;
+    color: white;
+}
+.menu-pop-up a h3{
+    margin-right: 8px;
+    font-weight: 400;
+}
+
+/* NAV BAR */
+.nav-bar{
+    background-color: #8cb1d7;
+    height: fit-content;
+}
+.margin-bar{
+    width: 620px;
+    justify-content: space-between;
+}
+.nav-bar .margin-bar .item-menu{
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    /* cursor: pointer; */
+}
+.margin-bar h5{
+    cursor: default;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #8cb1d7;
+    min-width: 160px;
+    box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.);
+    z-index: 1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: rgb(255, 253, 253);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: whitesmoke;
+    color: #1e4072;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
+}
