@@ -4,10 +4,12 @@ const {
 const router = Router();
 const sequelize = require('sequelize');
 
-const { Setor, RamalF, Pessoa, RamalV} = require('../models/associations')
 
 router.get("/alocar", async (req,res) => {
     res.render('alocar')
+})
+router.get("/add-ramal", async (req,res) => {
+    res.render('adicionar-ramal')
 })
 
 module.exports = router;

@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../models/db");
 
 const Servidor = db.define(
-  "servidores",
+  "Servidor",
   {
     matricula: {
       type: Sequelize.STRING,
@@ -15,11 +15,13 @@ const Servidor = db.define(
   },
   {
     timestamps: false,
+    freezeTableName: true,
   }
 );
 
 Servidor.associate = models => {
   Servidor.hasOne(models.RamalV);
+  Servidor.belongsToMany(models.Setor, {through: 'Setor_Servidor'});
 };
 
 module.exports = Servidor;

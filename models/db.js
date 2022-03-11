@@ -10,7 +10,7 @@ const db = new Sequelize(
 
 try {
   db.authenticate();
-  console.log("Conexão estabelecida com sucesso");
+  console.log("Conexão com o Banco de Dados estabelecida com sucesso");
 } catch (error) {
   console.error("Não conectou sabosta: ", error);
 }

@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../models/db");
 
 const RamalF = db.define(
-  "ramaisF",
+  "RamalF",
   {
     numero: {
       type: Sequelize.INTEGER,
@@ -19,7 +19,12 @@ const RamalF = db.define(
   },
   {
     timestamps: false,
+    freezeTableName: true,
   }
 );
+
+RamalF.associate = models => {
+  RamalF.belongsTo(models.Setor);
+}
 
 module.exports = RamalF;

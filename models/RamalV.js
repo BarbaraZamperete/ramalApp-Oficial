@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../models/db");
 
 const RamalV = db.define(
-  "ramaisV",
+  "RamalV",
   {
     numero: {
       type: Sequelize.INTEGER,
@@ -13,7 +13,12 @@ const RamalV = db.define(
   },
   {
     timestamps: false,
+    freezeTableName: true,
   }
 );
+
+RamalV.associate = models => {
+  RamalV.belongsTo(models.Servidor);
+}
 
 module.exports = RamalV;

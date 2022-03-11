@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../models/db");
 
 const User = db.define(
-  "users",
+  "User",
   {
     id: {
       type: Sequelize.INTEGER,
@@ -16,6 +16,7 @@ const User = db.define(
   },
   {
     timestamps: false,
+    freezeTableName: true,
   }
 );
 

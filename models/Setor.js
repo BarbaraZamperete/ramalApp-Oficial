@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../models/db");
 
 const Setor = db.define(
-  "setores",
+  "Setor",
   {
     id: {
       type: Sequelize.INTEGER,
@@ -15,11 +15,13 @@ const Setor = db.define(
   },
   {
     timestamps: false,
+    freezeTableName: true,
   }
 );
 
 Setor.associate = models => {
   Setor.hasMany(models.RamalF);
+  Setor.belongsToMany(models.Servidor, {through: 'Setor_Servidor'});
 }
 
 module.exports = Setor;

@@ -4,7 +4,6 @@ const {
 const router = Router();
 const sequelize = require('sequelize');
 
-const { Setor, RamalF, Pessoa, RamalV} = require('../models/associations')
 
 
 router.get("/add-servidor", (req, res) => {
