@@ -1,20 +1,21 @@
 .login-container {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .login-title h2 {
     font-size: 38px;
 }
 
-.login-container input {
+.login-container input, .login-container select {
     font-size: 22px;
     margin-bottom: 15px;
     padding: 8px;
     border-radius: 5px;
     border: none;
+    width: 100%;
 }
 
-.login-container input[type="text"], input[type="password"] {
+.login-container input[type="text"], input[type="password"], select {
     background-color: whitesmoke;
 }
 
@@ -105,6 +106,9 @@
     padding: 10px;
     color: white;
     letter-spacing: 1px;
+}
+#add-virtual{
+    width: 50%;
 }
 
 /*Form do ramal Físico*/
@@ -215,4 +219,27 @@
     border-radius: 10px;
     background-color: whitesmoke;
     overflow-y: auto;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ramal-list{
+    display: flex;
+    align-items: center;
+    color: white;
+    width: 80px;
+    height: 30px;
+    border-radius: 7px;
+    justify-content: center;
+    margin-top: 8px;
+    margin-right: 10px;
+    /* background-color: rgb(32, 71, 32); */
+}
+.ramal-list h4{
+    font-size: 22px;
+    font-weight: 400;
 }

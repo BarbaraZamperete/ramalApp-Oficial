@@ -28,7 +28,7 @@ module.exports = {
 
     await queryInterface.sequelize.query(`CREATE TABLE IF NOT EXISTS RamalV (
       id INT NOT NULL AUTO_INCREMENT,
-      Servidor_matricula VARCHAR(45) UNIQUE,
+      Servidor_matricula VARCHAR(45) NOT NULL,
       numero VARCHAR(45) NOT NULL,
       senha VARCHAR(45) NOT NULL,
       PRIMARY KEY (id, Servidor_matricula),

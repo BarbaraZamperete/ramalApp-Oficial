@@ -55,7 +55,9 @@ body {
     /* background-color: whitesmoke; */
 }
 
-
+.ramais-container a{
+    text-decoration: none;
+}
 .ramal-container{
     display: flex;
     align-items: center;
@@ -73,6 +75,7 @@ body {
     margin: 0px;
     font-weight: 400;
     margin-left: 2px;
+    text-decoration: none;
 }
 .ocupado-fisico{
     background-color: rgb(32, 71, 32);

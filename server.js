@@ -50,17 +50,17 @@ hbs.handlebars.registerHelper('ifEquals', function(e1, e2, opts){
 })
 
 /*#############################################################* */
-const Setor = require('./models/Setor');
-const RamalF = require('./models/RamalF');
+// const Setor = require('./models/Setor');
+// const RamalF = require('./models/RamalF');
 
-const db = require('./models/db');
-const Servidor = require('./models/Servidor');
-const run = async () => {
-    const [results] = await db.query("SELECT numero FROM ramalF", {model: RamalF, raw: true});
-    console.log(results);
-}
+// const db = require('./models/db');
+// const Servidor = require('./models/Servidor');
+// const run = async () => {
+//     const [results] = await db.query("SELECT numero FROM ramalF", {model: RamalF, raw: true});
+//     console.log(results);
+// }
 
-run();
+// run();
 
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/ramal.routes'));

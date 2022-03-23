@@ -26,3 +26,4 @@ modelo.addEventListener("change", (n) => {
         rack.classList.remove("hide")
     }
 })
+
