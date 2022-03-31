@@ -1,0 +1,17 @@
+<div class="login-container flex-column">
+    <div class="login-title">
+        <h2>Cadastrar Setor</h2>
+    </div>
+    <form action="/add-setor" method="post" class="login-form flex-column">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome">
+        <label for="andar">Andar:</label>
+        <select name="andar" id="">
+            <option value="subsolo">Subsolo</option>
+            <option value="terreo" selected>Térreo</option>
+            <option value="segundo">Segundo</option>
+            <option value="terceiro">Terceiro</option>
+        </select>
+        <input type="submit" value="Cadastrar">
+    </form>
+</div>

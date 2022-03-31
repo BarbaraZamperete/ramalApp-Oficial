@@ -1,0 +1,26 @@
+<div class="login-container flex-column">
+    <div class="login-title">
+        <h2>Cadastrar Servidor</h2>
+    </div>
+    <form action="/add-servidor" method="post" class="login-form flex-column">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome">
+        <label for="matricula">Matricula:</label>
+        <input type="text" name="matricula">
+        <label for="cargo">Cargo:</label>
+        <input type="text" name="cargo">
+        <label for="nomeSetor">Setor:</label>
+        <select name="nomeSetor" id="">
+            <option value="0">Selecione</option>
+            {{#each setores}}
+            <option value="{{nome}}">{{nome}}</option>
+            {{/each}}
+          </select>
+        <label for="chefia">Chefia:</label>
+        <select name="chefia" id="">
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+        <input type="submit" value="Cadastrar">
+    </form>
+</div>

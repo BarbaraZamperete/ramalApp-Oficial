@@ -14,7 +14,7 @@ module.exports = {
    await queryInterface.bulkInsert('Setor_Servidor', 
    [
      {
-      Setor_id: 1,
+      Setor_id: 2,
       Servidor_matricula: "8001906"
      }
    ])

@@ -1,11 +1,11 @@
-<nav class="nav-bar flex-row">
+<nav class="my-nav-bar flex-row">
   <div class="flex-row margin-bar">
     <a href="/home" class="item-menu" id="home">Home</a>
     {{!-- {{#if superUser}} --}}
       <div id="ramal-button">
         <h5 class="item-menu">Ramal</h5>
         <div id="ramal-pop-up" class="hide dropdown-content">
-          <a href="/alocar">Alocar Ramal</a>
+          {{!-- <a href="/alocar">Alocar Ramal</a> --}}
           <a href="/add-ramal">Adicionar Ramal</a>
         </div>
       </div>
@@ -13,11 +13,18 @@
       {{!-- <a href="/alocar" class="item-menu" id="alocar">Alocar Ramal</a> --}}
     {{!-- {{/if}} --}}
     <a href="/add-user" class="item-menu" id="user">Adicionar Usuário</a>
-    <div id="consultar-button">
-      <h5 class="item-menu">Consultar</h5>
-      <div id="consultar-pop-up" class="hide dropdown-content">
-        <a href="/search-servidor">Servidores</a>
-        <a href="/search-setor">Setores</a>
+    <div id="servidores-button">
+      <h5 class="item-menu">Servidores</h5>
+      <div id="servidores-pop-up" class="hide dropdown-content">
+        <a href="/search-servidor">Consultar</a>
+        <a href="/add-servidor">Adicionar</a>
+      </div>
+    </div>
+    <div id="setores-button">
+      <h5 class="item-menu">Setores</h5>
+      <div id="setores-pop-up" class="hide dropdown-content">
+        <a href="/search-setor">Consultar</a>
+        <a href="/add-setor">Adicionar</a>
       </div>
     </div>
 

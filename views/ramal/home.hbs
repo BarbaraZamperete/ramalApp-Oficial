@@ -3,7 +3,7 @@
     {{>menu-lateral}}
     <div class="ramais-container">
         {{#each ramaisF}}
-        <a href="/ramal{{id}}fisico">
+        <a href="/ramal-{{id}}-fisico">
             <div class="ramal-container ocupado-fisico" id="{{id}}">
                 {{!-- <span class="material-icons">&#xe838;</span> --}}
                 <h2>{{numero}}</h3>
@@ -12,7 +12,7 @@
         
         {{/each}}
         {{#each ramaisV}}
-        <a href="/ramal{{id}}virtual">
+        <a href="/ramal-{{id}}-virtual">
             <div class="ramal-container ocupado-virtual" id="{{id}}">
                 {{#if chefe}}
                 <span class="material-icons">&#xe838;</span>

@@ -21,7 +21,7 @@ module.exports = {
      (
        nome, andar
      ) VALUES(
-       "NTI","2"
+       "NTI","segundo"
      )`)
      
      await queryInterface.sequelize.query(`INSERT INTO RamalF

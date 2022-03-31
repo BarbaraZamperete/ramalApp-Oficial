@@ -1,1 +1,69 @@
-<h1>consultar setor</h1>
+<div class="setores-container">
+    <h2>Terceiro Andar</h2>
+    <div class="andar">
+        {{#each setoresLista}}
+        {{#ifEquals andar "terceiro"}}
+        <div class="setor-card">
+            <h3>{{nome}}</h3>
+            <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
+        </div>
+        {{/ifEquals}}
+        {{/each}}
+    </div>
+    <h2>Segundo Andar</h2>
+    <div class="andar">
+        {{#each setoresLista}}
+        {{#ifEquals andar "segundo"}}
+        <div class="setor-card">
+            <h3>{{nome}}</h3>
+            <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
+        </div>
+        {{/ifEquals}}
+        {{/each}}
+    </div>
+    <h2>Térreo</h2>
+    <div class="andar">
+        {{#each setoresLista}}
+        {{#ifEquals andar "terreo"}}
+        <div class="setor-card">
+            <h3>{{nome}}</h3>
+            <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
+        </div>
+        {{/ifEquals}}
+        {{/each}}
+    </div>
+    <h2>Subsolo</h2>
+    <div class="andar">
+        {{#each setoresLista}}
+        {{#ifEquals andar "subsolo"}}
+        <div class="setor-card">
+            <h3>{{nome}}</h3>
+            <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
+        </div>
+        {{/ifEquals}}
+        {{/each}}
+    </div>
+</div>
+
+<div id="abrirModal" class="modal">
+    <div id="modal-content"></div>
+</div>
+
+<script>
+    const modal = document.getElementById("abrirModal")
+    function modalAbrir(id) {
+        const modalContent = document.getElementById("modal-content")
+        modal.classList.add("modalAberto")
+        modalContent.innerHTML = `
+            <h3>Deseja realmente deletar este Setor?</h3>
+            <div>
+                <button id="deletar"><a href="/deletar/setor-${id}">Deletar</a></button>
+                <button onclick="fechar()">Cancelar</button>
+            </div>
+            
+        `
+    }
+    function fechar() {
+        modal.classList.remove("modalAberto")
+    }
+</script>

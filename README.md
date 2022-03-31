@@ -8,21 +8,26 @@ Projeto desenvolvido com Express, Node.js, Sequelize, SQL com banco de dados em 
 Sequelize está sendo usado apenas para gerenciar Migrations e Seeds, as Query são feitas em SQL com o Sequelize.query().
 
 # O que está sendo feito no momento:
-- funções de inserção de faixas de ramal
+- alocar ramal a um servidor
+- alocar ramal a um setor
 
 # O que foi feito:
+- funções de inserção de faixas de ramal
 - fazendo associações entre as tabelas do banco de dados
 - boa parte do front end
 - conexão com BD
 - primeira migration
+- pagina de editar ramal 
 - primeiro seed (de teste)
+- funções de inserção de servidores
+- funções de inserção de setores
 
 # Próximas coisas a fazer:
 - Entender como que raios a senha já entrou encriptada no DB
 
-- funções de inserção de servidores
-- funções de inserção de setores
+- buscas no home
+- buscar servidor
 - mensagem flash
 - login
-- pagina de editar ramal 
+
 

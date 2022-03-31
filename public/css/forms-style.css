@@ -243,3 +243,107 @@
     font-size: 22px;
     font-weight: 400;
 }
+
+
+/* RAMAL PAGE #########################*/
+
+.container-ramal-page{
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 100px auto;
+}
+.ramal-page {
+    width: 100%;
+    min-height: 500px;
+    border-radius: 10px;
+    background-color: #1e4072;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.titulo{
+    padding: 10px;
+    margin: 10px;
+    
+}
+.titulo a span, .titulo a{
+    font-size: 40px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    letter-spacing: 1px;
+}
+
+.area-data{
+    display: flex;
+    justify-content: center;
+}
+.metade-data{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* background-color: red; */
+}
+.data-virtual{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    height: 300px;
+    
+}
+.data-virtual .data-ramal{
+    width: 100%;
+}
+.data-ramal{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 10px 0px 10px;
+    
+}
+
+.data-ramal h4{
+    font-weight: 400;
+    font-size: 20px;
+    text-transform: uppercase;
+    max-width: 50%;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+span.separador{
+    height: 300px;
+    width: 2px;
+    background-color: #8cb1d7;
+    margin: 10px;
+}
+.buttons-area{
+    justify-self: flex-end;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    min-height: 100%;
+}
+.buttons-area button{
+    width: 200px;
+    background-color: #ffffff;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: 2px;
+    max-height: 40px;
+}
+
+
+/*############# setorrrrrrr ######*/
+

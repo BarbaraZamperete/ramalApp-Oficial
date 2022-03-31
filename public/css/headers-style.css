@@ -30,23 +30,23 @@
     letter-spacing: 1px;
 }
 
-.menu-pop-up{
+.my-menu-pop-up{
     width: 100px;
     flex: 0.3;
     /* background-color: red; */
     color: white;
 }
-.menu-pop-up a{
+.my-menu-pop-up a{
     text-decoration: none;
     color: white;
 }
-.menu-pop-up a h3{
+.my-menu-pop-up a h3{
     margin-right: 8px;
     font-weight: 400;
 }
 
 /* NAV BAR */
-.nav-bar{
+.my-nav-bar{
     background-color: #8cb1d7;
     height: fit-content;
 }
@@ -54,7 +54,7 @@
     width: 520px;
     justify-content: space-between;
 }
-.nav-bar .margin-bar .item-menu{
+.my-nav-bar .margin-bar .item-menu{
     color: white;
     text-decoration: none;
     margin: 5px;

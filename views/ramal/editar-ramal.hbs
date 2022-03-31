@@ -1,0 +1,102 @@
+<div class="container flex-column">
+  {{#ifEquals tipo "fisico"}}
+  {{#each ramal}}
+  <div class="ramal-form ramal-form-ativo" id="fisico-container">
+    <div class="titulo">
+      <a href="/ramal-{{id}}-{{../tipo}}"><span class="material-icons">&#xe408;</span>
+        Físico
+      </a>
+    </div>
+    <form action="/editar-{{id}}-fisico" method="post" class="flex-column">
+      <div class="form-area flex-row">
+        <div class="metade-form flex-column">
+          <label for="numero">Número:</label>
+          <input type="text" name="numero" value="{{numero}}" disabled />
+          <label for="nome">Setor:</label>
+          <select name="nome" id="">
+            <option value="0">Selecione</option>
+            {{#each ../setores}}
+            <option value="{{nome}}"  {{#ifEquals nome ../nome }} selected {{/ifEquals}}>{{nome}}</option>
+            {{/each}}
+          </select>
+          <label for="modelo">Modelo de Ramal:</label>
+          <select name="modelo" id="modelo">
+            <option value="digital" {{#ifEquals tipo "digital" }} selected {{/ifEquals}}>Ramal Digital</option>
+            <option value="ip" {{#ifEquals tipo "ip" }} selected {{/ifEquals}}>Ramal IP</option>
+            <option value="analógico" {{#ifEquals tipo "analógico" }} selected {{/ifEquals}}>Ramal Analógico</option>
+          </select>
+          <div class="rack-loc flex-row" id="rack">
+            <div class="metade-rack flex-column">
+              <label for="bastidor">Bastidor</label>
+              <input type="number" min="0" max="4" name="bastidor" />
+            </div>
+            <div class="metade-rack flex-column">
+              <label for="slot">Slot</label>
+              <input type="number" min="0" max="8" name="slot" />
+            </div>
+            <div class="metade-rack flex-column">
+              <label for="terminacao">Terminação</label>
+              <input type="number" min="0" max="16" name="terminacao" />
+            </div>
+          </div>
+        </div>
+        <div class="metade-form flex-column">
+          <label for="grupo">Grupo de Captura:</label>
+          <input type="text" name="grupo" />
+          <label for="categoria">Categoria:</label>
+          <input type="number" name="categoria" />
+          <label for="observacao">Observações:</label>
+          <textarea name="observacao" id="" cols="30" rows="2"></textarea>
+        </div>
+      </div>
+      <input type="submit" value="SALVAR" />
+
+    </form>
+  </div>
+  {{/each}}
+  {{/ifEquals}}
+  {{#ifEquals tipo "virtual"}}
+  {{#each ramal}}
+  <div class="ramal-form ramal-form-ativo">
+    <div class="titulo">
+      <a href="/ramal-{{id}}-{{../tipo}}"><span class="material-icons">&#xe408;</span>
+        Virtual
+      </a>
+    </div>
+    <form action="/editar-{{id}}-virtual" method="post" class="flex-column">
+      <div class="data-virtual">
+            <div class="data-ramal">
+                <h4>Número: </h4>
+                <input type="text" name="numero" value="{{numero}}" disabled>
+            </div>
+            <div class="data-ramal">
+                <h4>Servidor: </h4>
+                <input type="text" name="nome" value="{{nome}}" >
+            </div>
+            <div class="data-ramal">
+                <h4>Matricula: </h4>
+                <input type="text" name="matricula" value="{{matricula}}" >
+            </div>
+            <div class="data-ramal">
+                <h4>Cargo: </h4>
+                <input type="text" name="cargo" value="{{cargo}}" >
+            </div>
+            <div class="data-ramal">
+                <h4>Senha: </h4>
+                <input type="password" name="senha" value="{{senha}}" >
+            </div>
+            <div class="data-ramal">
+                <h4>Chefia: </h4>
+                <select name="chefia" id="">
+                  <option value="1" {{#ifEquals chefia 1}} selected {{/ifEquals}}>Sim</option>
+                  <option value="0" {{#ifEquals chefia 0}} selected {{/ifEquals}}>Não</option>
+                </select>
+            </div>
+        </div>
+      <input type="submit" value="SALVAR" />
+    </form>
+  </div>
+  {{/each}}
+  {{/ifEquals}}
+</div>
+<script src="/alocar-ramal.js" type="text/javascript"></script>
