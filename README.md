@@ -7,10 +7,11 @@ Projeto desenvolvido com Express, Node.js, Sequelize, SQL com banco de dados em 
 
 Sequelize está sendo usado apenas para gerenciar Migrations e Seeds, as Query são feitas em SQL com o Sequelize.query().
 
+Para quem for continuar esse projeto: entrar em contato pelo email: bahzamp25@gmail.com para maiores explicações sobre as funcionalidades do app
+
 # O que está sendo feito no momento:
 - editar ramal
 -- alocar ramalV a um servidor
--- alocar ramalF a um setor
 
 # Próximas coisas a fazer:
 - Entender como que raios a senha já entrou encriptada no DB (????)
