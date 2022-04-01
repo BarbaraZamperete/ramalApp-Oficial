@@ -1,96 +1,98 @@
 <div class="container-ramal-page">
-  <div class="ramal-page" id="fisico-container">
-    <div class="titulo">
-        <a href="/home"><span class="material-icons">&#xe408;</span>
-        {{ramal.numero}}
-        </a>
-    </div>
-    <div class="area-data">
-        {{#if controle}}
-        <div class="metade-data">
-            <div class="data-ramal">
-                <h4>Tipo de Ramal: </h4>
-                <h4>Físico</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Setor: </h4>
-                <h4>{{ramal.nome}}</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Grupo de Captura: </h4>
-                <h4>{{ramal.grupo}}</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Categoria: </h4>
-                <h4>{{ramal.categoria}}</h4>
-            </div>
+    <div class="ramal-page" id="fisico-container">
+        <div class="titulo">
+            <a href="/home"><span class="material-icons">&#xe408;</span>
+                {{ramal.numero}}
+            </a>
         </div>
-        <span class="separador"></span>
-        <div class="metade-data">
-            <div class="data-ramal">
-                <h4>Modelo: </h4>
-                <h4>{{ramal.tipo}}</h4>
+        <div class="area-data">
+            {{#if controle}}
+            <div class="metade-data">
+                <div class="data-ramal">
+                    <h4>Tipo de Ramal: </h4>
+                    <h4>Físico</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Setor: </h4>
+                    {{#ifNotEquals ramal.nome "SETOR NULO"}}
+                    <h4>{{ramal.nome}}</h4>
+                    {{/ifNotEquals}}
+                </div>
+                <div class="data-ramal">
+                    <h4>Grupo de Captura: </h4>
+                    <h4>{{ramal.grupo}}</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Categoria: </h4>
+                    <h4>{{ramal.categoria}}</h4>
+                </div>
             </div>
-            {{#if ramal.bastidor}}
-            <div class="data-ramal">
-                <h4>Bastidor: </h4>
-                <h4>{{ramal.bastidor}}</h4>
+            <span class="separador"></span>
+            <div class="metade-data">
+                <div class="data-ramal">
+                    <h4>Modelo: </h4>
+                    <h4>{{ramal.tipo}}</h4>
+                </div>
+                {{#if ramal.bastidor}}
+                <div class="data-ramal">
+                    <h4>Bastidor: </h4>
+                    <h4>{{ramal.bastidor}}</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Slot: </h4>
+                    <h4>{{ramal.slot}}</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Terminação: </h4>
+                    <h4>{{ramal.terminacao}}</h4>
+                </div>
+                {{/if}}
+                <div class="data-ramal">
+                    <h4>Observações: </h4>
+                    <h4>{{ramal.observacao}}</h4>
+                </div>
             </div>
-            <div class="data-ramal">
-                <h4>Slot: </h4>
-                <h4>{{ramal.slot}}</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Terminação: </h4>
-                <h4>{{ramal.terminacao}}</h4>
+            {{else}}
+            <div class="data-virtual">
+                <div class="data-ramal">
+                    <h4>Tipo de Ramal: </h4>
+                    <h4>Virtual</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Servidor: </h4>
+                    <h4>{{ramal.nome}}</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Matricula: </h4>
+                    <h4>{{ramal.matricula}}</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Cargo: </h4>
+                    <h4>{{ramal.cargo}}</h4>
+                </div>
+                <div class="data-ramal">
+                    <h4>Chefe: </h4>
+                    {{#ifEquals ramal.chefia 0}}
+                    <h4>Não</h4>
+                    {{/ifEquals}}{{#ifEquals ramal.chefia 1}}
+                    <h4>Sim</h4>
+                    {{/ifEquals}}
+                </div>
             </div>
             {{/if}}
-            <div class="data-ramal">
-                <h4>Observações: </h4>
-                <h4>{{ramal.observacao}}</h4>
-            </div>
         </div>
-        {{else}}
-        <div class="data-virtual">
-            <div class="data-ramal">
-                <h4>Tipo de Ramal: </h4>
-                <h4>Virtual</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Servidor: </h4>
-                <h4>{{ramal.nome}}</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Matricula: </h4>
-                <h4>{{ramal.matricula}}</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Cargo: </h4>
-                <h4>{{ramal.cargo}}</h4>
-            </div>
-            <div class="data-ramal">
-                <h4>Chefe: </h4>
-                {{#ifEquals ramal.chefia 0}}
-                    <h4>Não</h4>
-                {{/ifEquals}}{{#ifEquals ramal.chefia 1}}
-                    <h4>Sim</h4>
-                {{/ifEquals}}
-            </div>
+        <div class="buttons-area">
+            <button onclick="editar({{ramal.id}}, {{controle}})">Editar</button>
+            <button onclick="liberar({{ramal.id}}, {{controle}})">Liberar</button>
         </div>
-        {{/if}}
     </div>
-    <div class="buttons-area">
-        <button onclick="editar({{ramal.id}}, {{controle}})">Editar</button>
-        <button onclick="liberar({{ramal.id}}, {{controle}})">Liberar</button>
-    </div>    
-  </div>
 </div>
 
 <script>
-    function editar(id, controle){
+    function editar(id, controle) {
         window.location = `/editar-${id}-${controle}`
     }
-    function liberar(id, controle){
+    function liberar(id, controle) {
         window.location = `/liberar-${id}-${controle}`
     }
 </script>

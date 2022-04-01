@@ -1,9 +1,9 @@
 const Setor = require("../models/Setor");
 const RamalF = require("../models/RamalF");
+const Servidor = require("../models/Servidor");
 
 const sequelize = require("sequelize");
 const db = require("../models/db");
-const Servidor = require("../models/Servidor");
 const async = require("hbs/lib/async");
 const { cache } = require("hbs");
 
@@ -16,7 +16,7 @@ async function adicionarRamal(ramal, tipo) {
       return;
     } else {
       await db.query(
-        `INSERT INTO ramalF (Setor_id, numero, tipo) VALUES(1, ${ramal} , 'analógico');`
+        `INSERT INTO ramalF (Setor_id, numero, bastidor, slot, terminacao, tipo, grupo, categoria, observacao) VALUES(1, ${ramal}, '', '', '', 'analógico', '', '', '');`
       );
     }
   } else if (tipo == "ramalV") {
@@ -88,48 +88,26 @@ async function retornarRamais(
   return null;
 }
 
-// async function updateRamalFisico(
-//   id,
-//   idSetor,
-//   modelo,
-//   bastidor = false,
-//   slot = false,
-//   terminacao = false,
-//   grupo = false,
-//   categoria = false,
-//   observacao = false
-// ) {
-//   const update = db.query(`UPDATE ramalF SET Setor_id=${idSetor}, modelo=${modelo}, grupo=${grupo}, categoria=${categoria}, observacao=${observacao}`);
-// }
-
-// async function retornarNomeTodosSetores() {
-//   const [listaNomeSetores] = await db.query(`SELECT nome FROM Setor`);
-//   return listaNomeSetores;
-// }
-
-// async function retornarSetor(id = false, nome = false) {
-//   if (id) {
-//     console.log("Só tem o id");
-//     return null;
-//   }
-//   if (nome) {
-//     const listaSetores = await retornarNomeTodosSetores();
-//     //checar se o novo setor existe
-//     var setorExist = false;
-//     listaSetores.forEach((element) => {
-//       if (element.nome == nome) {
-//         setorExist = true;
-//       }
-//     });
-//     const [[setor]] = await db.query(
-//       `SELECT * FROM setor WHERE nome="${nome}"`
-//     );
-//     return setor;
-//   }
-// }
+async function updateRamalFisico(
+  id,
+  idSetor,
+  modelo,
+  bastidor,
+  slot,
+  terminacao,
+  grupo,
+  categoria,
+  observacao
+) {
+  const update = db.query(
+    `UPDATE ramalF SET Setor_id=${idSetor}, bastidor="${bastidor}", slot="${slot}", terminacao="${terminacao}", tipo="${modelo}", grupo="${grupo}", categoria="${categoria}", observacao="${observacao}" WHERE id=${id}`
+  );
+  return update;
+}
 
 module.exports = {
   adicionarRamal,
   removerRamal,
-  retornarRamais
+  retornarRamais,
+  updateRamalFisico,
 };

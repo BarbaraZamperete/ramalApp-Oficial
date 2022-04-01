@@ -13,10 +13,10 @@
           <label for="numero">Número:</label>
           <input type="text" name="numero" value="{{numero}}" disabled />
           <label for="nome">Setor:</label>
-          <select name="nome" id="">
+          <select name="setor" id="">
             <option value="0">Selecione</option>
             {{#each ../setores}}
-            <option value="{{nome}}"  {{#ifEquals nome ../nome }} selected {{/ifEquals}}>{{nome}}</option>
+            <option value="{{id}}" {{#ifEquals nome ../nome }} selected {{/ifEquals}}>{{nome}}</option>
             {{/each}}
           </select>
           <label for="modelo">Modelo de Ramal:</label>
@@ -44,7 +44,7 @@
           <label for="grupo">Grupo de Captura:</label>
           <input type="text" name="grupo" />
           <label for="categoria">Categoria:</label>
-          <input type="number" name="categoria" />
+          <input type="number" name="categoria" min="0" max="10"/>
           <label for="observacao">Observações:</label>
           <textarea name="observacao" id="" cols="30" rows="2"></textarea>
         </div>
@@ -65,34 +65,19 @@
     </div>
     <form action="/editar-{{id}}-virtual" method="post" class="flex-column">
       <div class="data-virtual">
-            <div class="data-ramal">
-                <h4>Número: </h4>
-                <input type="text" name="numero" value="{{numero}}" disabled>
-            </div>
-            <div class="data-ramal">
-                <h4>Servidor: </h4>
-                <input type="text" name="nome" value="{{nome}}" >
-            </div>
-            <div class="data-ramal">
-                <h4>Matricula: </h4>
-                <input type="text" name="matricula" value="{{matricula}}" >
-            </div>
-            <div class="data-ramal">
-                <h4>Cargo: </h4>
-                <input type="text" name="cargo" value="{{cargo}}" >
-            </div>
-            <div class="data-ramal">
-                <h4>Senha: </h4>
-                <input type="password" name="senha" value="{{senha}}" >
-            </div>
-            <div class="data-ramal">
-                <h4>Chefia: </h4>
-                <select name="chefia" id="">
-                  <option value="1" {{#ifEquals chefia 1}} selected {{/ifEquals}}>Sim</option>
-                  <option value="0" {{#ifEquals chefia 0}} selected {{/ifEquals}}>Não</option>
-                </select>
-            </div>
+        <div class="data-ramal">
+          <h4>Número: </h4>
+          <input type="text" name="numero" value="{{numero}}" disabled>
         </div>
+        <div class="data-ramal">
+          <h4>Matricula: </h4>
+          <input type="text" name="matricula" value="{{matricula}}">
+        </div>
+        <div class="data-ramal">
+          <h4>Senha: </h4>
+          <input type="password" name="senha" value="{{senha}}">
+        </div>
+      </div>
       <input type="submit" value="SALVAR" />
     </form>
   </div>

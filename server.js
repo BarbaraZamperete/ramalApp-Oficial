@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     next()
 })
 
-var hbs = expressHbs.create({});
+const hbs = expressHbs.create({});
 hbs.handlebars.registerHelper('ifEquals', function(e1, e2, opts){
     if (e1 == e2) {
         return opts.fn(this);
@@ -48,19 +48,13 @@ hbs.handlebars.registerHelper('ifEquals', function(e1, e2, opts){
         return opts.inverse(this);
     }
 })
-
-/*#############################################################* */
-// const Setor = require('./models/Setor');
-// const RamalF = require('./models/RamalF');
-
-// const db = require('./models/db');
-// const Servidor = require('./models/Servidor');
-// const run = async () => {
-//     const [results] = await db.query("SELECT numero FROM ramalF", {model: RamalF, raw: true});
-//     console.log(results);
-// }
-
-// run();
+hbs.handlebars.registerHelper('ifNotEquals', function(e1, e2, opts){
+    if (e1 != e2) {
+        return opts.fn(this);
+    }else{
+        return opts.inverse(this);
+    }
+})
 
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/ramal.routes'));
