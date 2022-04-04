@@ -6,9 +6,11 @@ const {
   adicionarRamal,
   removerRamal,
   retornarRamais,
-  updateRamalFisico,
+  alocarEditarRamalFisico,
+  alocarEditarRamalServidor
 } = require("../controllers/ramalQuerys.controller");
 const { listaSetores } = require("../controllers/setorQuery.controller");
+const { listaServidores } = require("../controllers/servidores.controler");
 const db = require("../models/db");
 const Setor = require("../models/Setor");
 
@@ -32,7 +34,7 @@ router.post("/add-ramal-f", async (req, res) => {
       ramal++;
     }
   }
-  res.redirect("home");
+  res.redirect("/home");
 });
 
 //############### VIRTUALLLLLLLL
@@ -48,7 +50,7 @@ router.post("/add-ramal-v", async (req, res) => {
       ramal++;
     }
   }
-  res.redirect("home");
+  res.redirect("/home");
 });
 
 //############### EXIBIR RAMAIS
@@ -81,6 +83,8 @@ router.get("/ramal-:id-:tipo", async (req, res) => {
   res.render("ramal/ramal-page", { ramal, controle });
 });
 
+// EDITAR RAMAL ##################
+
 router.get("/editar-:id-:controle", async (req, res) => {
   const { id, controle } = req.params;
   let tipo;
@@ -97,13 +101,17 @@ router.get("/editar-:id-:controle", async (req, res) => {
     );
   }
   const setores = await listaSetores();
-  res.render("ramal/editar-ramal", { ramal, tipo, setores });
+  const servidores = await listaServidores();
+  res.render("ramal/editar-ramal", { ramal, tipo, setores, servidores });
 });
 
+
 router.post("/editar-:id-virtual", async (req, res) => {
-  const { nome, matricula, cargo, senha, chefia } = req.body;
+  const {matricula, senha} = req.body;
   const { id } = req.params;
-  console.log(req.body);
+  //alocar ramal ao servidor
+  console.log(id)
+  await alocarEditarRamalServidor(id, matricula, senha)
   res.redirect("/home");
 });
 
@@ -119,7 +127,7 @@ router.post("/editar-:id-fisico", async (req, res) => {
     observacao,
   } = req.body;
   const { id } = req.params;
-  const update = await updateRamalFisico(
+  const update = await alocarEditarRamalFisico(
     id,
     setor,
     modelo,

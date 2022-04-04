@@ -14,9 +14,9 @@
                 </div>
                 <div class="data-ramal">
                     <h4>Setor: </h4>
-                    {{#ifNotEquals ramal.nome "SETOR NULO"}}
+                    {{#ifCond ramal.nome "!=" 'Setor Nulo'}}
                     <h4>{{ramal.nome}}</h4>
-                    {{/ifNotEquals}}
+                    {{/ifCond}}
                 </div>
                 <div class="data-ramal">
                     <h4>Grupo de Captura: </h4>
@@ -58,6 +58,7 @@
                     <h4>Tipo de Ramal: </h4>
                     <h4>Virtual</h4>
                 </div>
+                {{#ifCond ramal.nome "!=" 'Servidor Nulo'}}
                 <div class="data-ramal">
                     <h4>Servidor: </h4>
                     <h4>{{ramal.nome}}</h4>
@@ -70,13 +71,14 @@
                     <h4>Cargo: </h4>
                     <h4>{{ramal.cargo}}</h4>
                 </div>
+                {{/ifCond}}
                 <div class="data-ramal">
                     <h4>Chefe: </h4>
-                    {{#ifEquals ramal.chefia 0}}
+                    {{#ifCond ramal.chefia "==" 0}}
                     <h4>Não</h4>
-                    {{/ifEquals}}{{#ifEquals ramal.chefia 1}}
+                    {{/ifCond}}{{#ifCond ramal.chefia "==" 1}}
                     <h4>Sim</h4>
-                    {{/ifEquals}}
+                    {{/ifCond}}
                 </div>
             </div>
             {{/if}}

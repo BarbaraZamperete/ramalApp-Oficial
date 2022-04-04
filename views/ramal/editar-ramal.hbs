@@ -1,7 +1,7 @@
 <div class="container flex-column">
-  {{#ifEquals tipo "fisico"}}
+  {{#ifCond tipo "==" "fisico"}}
   {{#each ramal}}
-  <div class="ramal-form ramal-form-ativo" id="fisico-container">
+  <div class="ramal-form ramal-form-edit ramal-form-ativo" id="fisico-container">
     <div class="titulo">
       <a href="/ramal-{{id}}-{{../tipo}}"><span class="material-icons">&#xe408;</span>
         Físico
@@ -16,14 +16,14 @@
           <select name="setor" id="">
             <option value="0">Selecione</option>
             {{#each ../setores}}
-            <option value="{{id}}" {{#ifEquals nome ../nome }} selected {{/ifEquals}}>{{nome}}</option>
+            <option value="{{id}}" {{#ifCond nome "==" ../nome }} selected {{/ifCond}}>{{nome}}</option>
             {{/each}}
           </select>
           <label for="modelo">Modelo de Ramal:</label>
           <select name="modelo" id="modelo">
-            <option value="digital" {{#ifEquals tipo "digital" }} selected {{/ifEquals}}>Ramal Digital</option>
-            <option value="ip" {{#ifEquals tipo "ip" }} selected {{/ifEquals}}>Ramal IP</option>
-            <option value="analógico" {{#ifEquals tipo "analógico" }} selected {{/ifEquals}}>Ramal Analógico</option>
+            <option value="digital" {{#ifCond tipo "==" "digital" }} selected {{/ifCond}}>Ramal Digital</option>
+            <option value="ip" {{#ifCond tipo "==" "ip" }} selected {{/ifCond}}>Ramal IP</option>
+            <option value="analógico" {{#ifCond tipo "==" "analógico" }} selected {{/ifCond}}>Ramal Analógico</option>
           </select>
           <div class="rack-loc flex-row" id="rack">
             <div class="metade-rack flex-column">
@@ -44,18 +44,17 @@
           <label for="grupo">Grupo de Captura:</label>
           <input type="text" name="grupo" />
           <label for="categoria">Categoria:</label>
-          <input type="number" name="categoria" min="0" max="10"/>
+          <input type="number" name="categoria" min="0" max="10" />
           <label for="observacao">Observações:</label>
           <textarea name="observacao" id="" cols="30" rows="2"></textarea>
         </div>
       </div>
       <input type="submit" value="SALVAR" />
-
     </form>
   </div>
   {{/each}}
-  {{/ifEquals}}
-  {{#ifEquals tipo "virtual"}}
+  {{/ifCond}}
+  {{#ifCond tipo "==" "virtual"}}
   {{#each ramal}}
   <div class="ramal-form ramal-form-ativo">
     <div class="titulo">
@@ -71,7 +70,12 @@
         </div>
         <div class="data-ramal">
           <h4>Matricula: </h4>
-          <input type="text" name="matricula" value="{{matricula}}">
+          <input type="text" name="matricula" value="{{matricula}}" list="matriculas">
+          <datalist id="matriculas">
+            {{#each ../servidores}}
+            <option value="{{matricula}}">{{matricula}}</option>
+            {{/each}}
+          </datalist>
         </div>
         <div class="data-ramal">
           <h4>Senha: </h4>
@@ -82,6 +86,6 @@
     </form>
   </div>
   {{/each}}
-  {{/ifEquals}}
+  {{/ifCond}}
 </div>
 <script src="/alocar-ramal.js" type="text/javascript"></script>

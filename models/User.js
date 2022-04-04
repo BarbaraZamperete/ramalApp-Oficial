@@ -4,7 +4,7 @@ const db = require("../models/db");
 const User = db.define(
   "User",
   {
-    id: {
+    idUser: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
@@ -12,7 +12,7 @@ const User = db.define(
     },
     login: Sequelize.STRING(50),
     senha: Sequelize.STRING(50),
-    role: Sequelize.INTEGER,
+    role: Sequelize.INTEGER(5),
   },
   {
     timestamps: false,

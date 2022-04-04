@@ -19,9 +19,5 @@ const Servidor = db.define(
   }
 );
 
-Servidor.associate = models => {
-  Servidor.hasOne(models.RamalV);
-  Servidor.belongsToMany(models.Setor, {through: 'Setor_Servidor'});
-};
 
 module.exports = Servidor;

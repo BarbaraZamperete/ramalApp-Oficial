@@ -9,9 +9,9 @@ const RamalF = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    bastidor: Sequelize.INTEGER,
-    slot: Sequelize.INTEGER,
-    terminacao: Sequelize.INTEGER,
+    bastidor: Sequelize.STRING(5),
+    slot: Sequelize.STRING(5),
+    terminacao: Sequelize.STRING(5),
     tipo: Sequelize.STRING(15),
     grupo: Sequelize.STRING(30),
     categoria: Sequelize.STRING(15),
@@ -23,8 +23,5 @@ const RamalF = db.define(
   }
 );
 
-RamalF.associate = models => {
-  RamalF.belongsTo(models.Setor);
-}
 
 module.exports = RamalF;

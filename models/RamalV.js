@@ -17,8 +17,4 @@ const RamalV = db.define(
   }
 );
 
-RamalV.associate = models => {
-  RamalV.belongsTo(models.Servidor);
-}
-
 module.exports = RamalV;

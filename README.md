@@ -10,17 +10,17 @@ Sequelize está sendo usado apenas para gerenciar Migrations e Seeds, as Query s
 Para quem for continuar esse projeto: entrar em contato pelo email: bahzamp25@gmail.com para maiores explicações sobre as funcionalidades do app
 
 # O que está sendo feito no momento:
-- editar ramal
--- alocar ramalV a um servidor
+- mensagem flash
+- fazer as buscas no home (filtros)
+- colocar as estrelas dos chefes
 
 # Próximas coisas a fazer:
-- Entender como que raios a senha já entrou encriptada no DB (????)
+- Entender como que raios a senha já entrou encriptada no DB (????) (OBS: NÂO TA MAIS ENCRIPTADA, SLA COMO)
 
-- fazer as buscas no home (filtros)
-- buscar servidor
-- mensagem flash
+- consultar servidor
 - login
 - proteger rotas com os perfis de acesso: 0(padrão), 1(adm), 2(superAdm)
+- página inicial bonita
 
 # O que já foi feito:
 - funções de inserção de faixas de ramal
@@ -32,6 +32,8 @@ Para quem for continuar esse projeto: entrar em contato pelo email: bahzamp25@gm
 - primeiro seed (de teste)
 - funções de inserção de servidores
 - funções de inserção de setores
+- alocar ramalV a um servidor
+- editar ramal
 
 
 

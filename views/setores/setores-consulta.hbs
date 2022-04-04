@@ -2,45 +2,45 @@
     <h2>Terceiro Andar</h2>
     <div class="andar">
         {{#each setoresLista}}
-        {{#ifEquals andar "terceiro"}}
+        {{#ifCond andar "==" "terceiro"}}
         <div class="setor-card">
             <h3>{{nome}}</h3>
             <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
         </div>
-        {{/ifEquals}}
+        {{/ifCond}}
         {{/each}}
     </div>
     <h2>Segundo Andar</h2>
     <div class="andar">
         {{#each setoresLista}}
-        {{#ifEquals andar "segundo"}}
+        {{#ifCond andar "==" "segundo"}}
         <div class="setor-card">
             <h3>{{nome}}</h3>
             <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
         </div>
-        {{/ifEquals}}
+        {{/ifCond}}
         {{/each}}
     </div>
     <h2>Térreo</h2>
     <div class="andar">
         {{#each setoresLista}}
-        {{#ifEquals andar "terreo"}}
+        {{#ifCond andar "==" "terreo"}}
         <div class="setor-card">
             <h3>{{nome}}</h3>
             <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
         </div>
-        {{/ifEquals}}
+        {{/ifCond}}
         {{/each}}
     </div>
     <h2>Subsolo</h2>
     <div class="andar">
         {{#each setoresLista}}
-        {{#ifEquals andar "subsolo"}}
+        {{#ifCond andar "==" "subsolo"}}
         <div class="setor-card">
             <h3>{{nome}}</h3>
             <button onclick="modalAbrir({{id}})" title="Deletar"><span class="material-icons">&#xe872;</span></button>
         </div>
-        {{/ifEquals}}
+        {{/ifCond}}
         {{/each}}
     </div>
 </div>

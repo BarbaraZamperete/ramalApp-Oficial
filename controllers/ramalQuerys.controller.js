@@ -2,10 +2,13 @@ const Setor = require("../models/Setor");
 const RamalF = require("../models/RamalF");
 const Servidor = require("../models/Servidor");
 
+const { servidorExiste } = require("../controllers/servidores.controler");
+
 const sequelize = require("sequelize");
 const db = require("../models/db");
 const async = require("hbs/lib/async");
 const { cache } = require("hbs");
+const RamalV = require("../models/RamalV");
 
 async function adicionarRamal(ramal, tipo) {
   if (tipo == "ramalF") {
@@ -88,7 +91,7 @@ async function retornarRamais(
   return null;
 }
 
-async function updateRamalFisico(
+async function alocarEditarRamalFisico(
   id,
   idSetor,
   modelo,
@@ -105,9 +108,24 @@ async function updateRamalFisico(
   return update;
 }
 
+async function alocarEditarRamalServidor(idRamal, matricula, senha) {
+  //checar se a matricula existe
+  const servidor = await servidorExiste(matricula);
+  if (servidor) {
+    //se sim, checar se esse servidor já possui um ramal virtual
+    if (!servidor.dataValues.RamalV) {
+      const ramal = await RamalV.findOne({ where: { id: idRamal } });
+      servidor.setRamalV(ramal);
+    }
+    //se não, alocar ramal a esse servidor
+  }
+  return;
+}
+
 module.exports = {
   adicionarRamal,
   removerRamal,
   retornarRamais,
-  updateRamalFisico,
+  alocarEditarRamalFisico,
+  alocarEditarRamalServidor,
 };

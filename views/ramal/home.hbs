@@ -1,17 +1,36 @@
-
 <div class="home-container">
     {{>menu-lateral}}
     <div class="ramais-container">
         {{#each ramaisF}}
+        {{#ifCond Setor_id "==" 1}}
+        <a href="/ramal-{{id}}-fisico">
+            <div class="ramal-container livre-fisico" id="{{id}}">
+                {{!-- <span class="material-icons">&#xe838;</span> --}}
+                <h2>{{numero}}</h3>
+            </div>
+        </a>
+        {{/ifCond}}
+        {{#ifCond Setor_id "!=" 1}}
         <a href="/ramal-{{id}}-fisico">
             <div class="ramal-container ocupado-fisico" id="{{id}}">
                 {{!-- <span class="material-icons">&#xe838;</span> --}}
                 <h2>{{numero}}</h3>
             </div>
         </a>
-        
+        {{/ifCond}}
         {{/each}}
         {{#each ramaisV}}
+        {{#ifCond Servidor_matricula "==" "0000000" }}
+        <a href="/ramal-{{id}}-virtual">
+            <div class="ramal-container livre-virtual" id="{{id}}">
+                {{#if chefe}}
+                <span class="material-icons">&#xe838;</span>
+                {{/if}}
+                <h2>{{numero}}</h3>
+            </div>
+        </a>
+        {{/ifCond}}
+        {{#ifCond Servidor_matricula "!=" "0000000" }}
         <a href="/ramal-{{id}}-virtual">
             <div class="ramal-container ocupado-virtual" id="{{id}}">
                 {{#if chefe}}
@@ -20,7 +39,8 @@
                 <h2>{{numero}}</h3>
             </div>
         </a>
-        
+        {{/ifCond}}
+
         {{/each}}
     </div>
 </div>
