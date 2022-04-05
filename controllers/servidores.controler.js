@@ -41,4 +41,16 @@ async function servidorExiste(matricula){
     return await Servidor.findOne({where: {matricula: matricula}, include: [{model: RamalV}]})
 }
 
-module.exports = { addServidor, listaServidores, servidorExiste };
+async function allChefes(){
+  const [chefes] = await Servidor.findAll({where: {chefia: 1}})
+  // console.log(chefes)
+  const chefesLista = []
+  if(chefes){
+    chefesLista.push(chefes.dataValues.matricula)
+  }else{
+    return null
+  }
+  return chefesLista;
+}
+
+module.exports = { addServidor, listaServidores, servidorExiste, allChefes };

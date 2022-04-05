@@ -16,6 +16,9 @@ const Setor = db.define(
   {
     timestamps: false,
     freezeTableName: true,
+    name: {
+      singular: "setor"
+    }
   }
 );
 

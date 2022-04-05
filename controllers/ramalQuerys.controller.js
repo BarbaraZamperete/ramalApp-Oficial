@@ -19,7 +19,7 @@ async function adicionarRamal(ramal, tipo) {
       return;
     } else {
       await db.query(
-        `INSERT INTO ramalF (Setor_id, numero, bastidor, slot, terminacao, tipo, grupo, categoria, observacao) VALUES(1, ${ramal}, '', '', '', 'analógico', '', '', '');`
+        `INSERT INTO ramalF (Setor_id, numero, bastidor, slot, terminacao, tipo, grupo, categoria, observacao) VALUES('1', ${ramal}, '', '', '', 'analógico', '', '', '');`
       );
     }
   } else if (tipo == "ramalV") {
@@ -43,7 +43,7 @@ async function removerRamal(ramal, tipo) {
 
 async function ressetarId(tabela) {
   await db.query(`
-  ALTER TABLE ${tabela} AUTO_INCREMENT = 1
+  ALTER TABLE ${tabela} AUTO_INCREMENT = '1'
   `);
 }
 
@@ -70,6 +70,20 @@ async function retornarRamais(
   ) {
     const [ramaisF] = await db.query(`SELECT * FROM ramalF ORDER BY numero`);
     const [ramaisV] = await db.query(`SELECT * FROM ramalV ORDER BY numero`);
+    // const ramais = await RamalF.findAll({include: {model: Setor, as: "idSetor"}, order: ["numero"]})
+    // ramais.forEach(element => {
+    //   console.log(element.dataValues.idSetor)
+    // });
+    // const ramaisV = await RamalV.findAll({include: Servidor, order: ["numero"]})
+    // const listaRamaisV = []
+    // ramaisV.forEach(async function (ramal){
+      
+    //   let servidor = await Servidor.findOne({where: {matricula: ramal.Servidor_matricula}})
+    //   // console.log(ramal, servidor.dataValues.chefia)
+    //   listaRamaisV.push({ramalServidor: [ramal, servidor.dataValues.chefia]})
+    //   // listaRamaisV.push(servidor.dataValues.chefia)
+    // })
+    // console.log(listaRamaisV)
     return [ramaisF, ramaisV];
   }
   //Se tiver só o TIPO e o ID
@@ -102,9 +116,11 @@ async function alocarEditarRamalFisico(
   categoria,
   observacao
 ) {
-  const update = db.query(
-    `UPDATE ramalF SET Setor_id=${idSetor}, bastidor="${bastidor}", slot="${slot}", terminacao="${terminacao}", tipo="${modelo}", grupo="${grupo}", categoria="${categoria}", observacao="${observacao}" WHERE id=${id}`
-  );
+  // const update = await db.query(
+  //   `UPDATE ramalF SET Setor_id=${idSetor}, bastidor="${bastidor}", slot="${slot}", terminacao="${terminacao}", tipo="${modelo}", grupo="${grupo}", categoria="${categoria}", observacao="${observacao}" WHERE id=${id}`
+  // );
+  const update = await RamalF.update({Setor_id: idSetor, bastidor: bastidor, slot: slot, terminacao: terminacao, tipo: modelo, grupo: grupo, categoria: categoria, observacao: observacao}, {where: {id: id}})
+
   return update;
 }
 
@@ -122,10 +138,24 @@ async function alocarEditarRamalServidor(idRamal, matricula, senha) {
   return;
 }
 
+async function liberarRamal(id, controle) {
+  if (controle == "1") {
+    return await db.query(
+      `UPDATE ramalF SET Setor_id = 1, bastidor = "", terminacao = "", slot = "", tipo = "analógico", grupo = "", categoria = "", observacao = ""  WHERE id = ${id}`
+    );
+  } else if (controle == "0") {
+    return await RamalV.update(
+      { Servidor_matricula: "0000000" },
+      { where: { id: id } }
+    );
+  }
+}
+
 module.exports = {
   adicionarRamal,
   removerRamal,
   retornarRamais,
   alocarEditarRamalFisico,
   alocarEditarRamalServidor,
+  liberarRamal,
 };

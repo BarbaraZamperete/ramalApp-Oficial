@@ -23,9 +23,6 @@
         {{#ifCond Servidor_matricula "==" "0000000" }}
         <a href="/ramal-{{id}}-virtual">
             <div class="ramal-container livre-virtual" id="{{id}}">
-                {{#if chefe}}
-                <span class="material-icons">&#xe838;</span>
-                {{/if}}
                 <h2>{{numero}}</h3>
             </div>
         </a>
@@ -33,7 +30,7 @@
         {{#ifCond Servidor_matricula "!=" "0000000" }}
         <a href="/ramal-{{id}}-virtual">
             <div class="ramal-container ocupado-virtual" id="{{id}}">
-                {{#if chefe}}
+                {{#if chefia}}
                 <span class="material-icons">&#xe838;</span>
                 {{/if}}
                 <h2>{{numero}}</h3>

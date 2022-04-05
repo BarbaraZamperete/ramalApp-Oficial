@@ -7,10 +7,11 @@ const {
   removerRamal,
   retornarRamais,
   alocarEditarRamalFisico,
-  alocarEditarRamalServidor
+  alocarEditarRamalServidor,
+  liberarRamal
 } = require("../controllers/ramalQuerys.controller");
 const { listaSetores } = require("../controllers/setorQuery.controller");
-const { listaServidores } = require("../controllers/servidores.controler");
+const { listaServidores, allChefes } = require("../controllers/servidores.controler");
 const db = require("../models/db");
 const Setor = require("../models/Setor");
 
@@ -57,7 +58,18 @@ router.post("/add-ramal-v", async (req, res) => {
 
 router.get("/home", async (req, res) => {
   const [ramaisF, ramaisV] = await retornarRamais();
+  const chefes = await allChefes()
+  //definir chefe cada ramalV que a matricula esta na allChefes()
+  // console.log(chefes)
   const setores = await listaSetores();
+  ramaisV.forEach((e)=>{
+    if(chefes.includes(e.Servidor_matricula)){
+      e.chefia = 1
+    }else{
+      e.chefia = 0
+    }
+  })
+  // console.log(ramaisV)
   res.render("ramal/home", { ramaisF, ramaisV, setores });
 });
 
@@ -143,6 +155,8 @@ router.post("/editar-:id-fisico", async (req, res) => {
 });
 
 router.get("/liberar-:id-:controle", async (req, res) => {
+  console.log(req.params);
+  await liberarRamal(req.params.id, req.params.controle);
   res.redirect("/home");
 });
 
