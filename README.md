@@ -10,16 +10,16 @@ Sequelize está sendo usado apenas para gerenciar Migrations e Seeds, as Query s
 Para quem for continuar esse projeto: entrar em contato pelo email: bahzamp25@gmail.com para maiores explicações sobre as funcionalidades do app
 
 # O que está sendo feito no momento:
-- colocar estrela nos ramais das salas de chefia
+- fazer as buscas no home (filtros)
+- consultar servidor
 
 # Próximas coisas a fazer:
 - Entender como que raios a senha já entrou encriptada no DB (????) (OBS: NÂO TA MAIS ENCRIPTADA, SLA COMO)
 
-- mensagem flash
-- fazer as buscas no home (filtros)
-- consultar servidor
 - login
 - proteger rotas com os perfis de acesso: 0(padrão), 1(adm), 2(superAdm)
+- colocar estrela nos ramais das salas de chefia
+- mensagem flash
 - página inicial bonita
 
 # O que já foi feito:

@@ -19,12 +19,12 @@ async function adicionarRamal(ramal, tipo) {
       return;
     } else {
       await db.query(
-        `INSERT INTO ramalF (Setor_id, numero, bastidor, slot, terminacao, tipo, grupo, categoria, observacao) VALUES('1', ${ramal}, '', '', '', 'analógico', '', '', '');`
+        `INSERT INTO ramalF (Setor_id, numero, bastidor, slot, terminacao, tipo, grupo, categoria, observacao, disponibilidade) VALUES('1', ${ramal}, '', '', '', 'analógico', '', '', '', 0);`
       );
     }
   } else if (tipo == "ramalV") {
     await db.query(
-      `INSERT INTO ramalV (Servidor_matricula, numero, senha) VALUES ("0000000", ${ramal}, ${ramal});`
+      `INSERT INTO ramalV (Servidor_matricula, numero, senha, disponibilidade) VALUES ("0000000", ${ramal}, ${ramal}, 0);`
     );
   }
 }
@@ -77,7 +77,7 @@ async function retornarRamais(
     // const ramaisV = await RamalV.findAll({include: Servidor, order: ["numero"]})
     // const listaRamaisV = []
     // ramaisV.forEach(async function (ramal){
-      
+
     //   let servidor = await Servidor.findOne({where: {matricula: ramal.Servidor_matricula}})
     //   // console.log(ramal, servidor.dataValues.chefia)
     //   listaRamaisV.push({ramalServidor: [ramal, servidor.dataValues.chefia]})
@@ -102,6 +102,16 @@ async function retornarRamais(
       return ramal;
     }
   }
+  if (disponibilidade && modelo && setor && nome && matricula && numero) {
+    const ramais = [];
+    if (numero != "") {
+      if (modelo == "virtual") {
+        const ramaisV = await RamalV.findAll({
+          where: { Servidor_matricula: matricula, numero: numero },
+        });
+      }
+    }
+  }
   return null;
 }
 
@@ -119,8 +129,27 @@ async function alocarEditarRamalFisico(
   // const update = await db.query(
   //   `UPDATE ramalF SET Setor_id=${idSetor}, bastidor="${bastidor}", slot="${slot}", terminacao="${terminacao}", tipo="${modelo}", grupo="${grupo}", categoria="${categoria}", observacao="${observacao}" WHERE id=${id}`
   // );
-  const update = await RamalF.update({Setor_id: idSetor, bastidor: bastidor, slot: slot, terminacao: terminacao, tipo: modelo, grupo: grupo, categoria: categoria, observacao: observacao}, {where: {id: id}})
+  let disponibilidade;
+  if (idSetor != 0) {
+    disponibilidade = 1;
+  }
+  const query = `UPDATE RamalF SET Setor_id= ${idSetor}, bastidor= "${bastidor}", slot= "${slot}", terminacao= "${terminacao}", tipo= "${modelo}", grupo= "${grupo}", categoria= "${categoria}", observacao= "${observacao}", disponibilidade= ${disponibilidade}`;
 
+  // const update = await RamalF.update(
+  //   {
+  //     Setor_id: idSetor,
+  //     bastidor: bastidor,
+  //     slot: slot,
+  //     terminacao: terminacao,
+  //     tipo: modelo,
+  //     grupo: grupo,
+  //     categoria: categoria,
+  //     observacao: observacao,
+  //     disponibilidade: disponibilidade,
+  //   },
+  //   { where: { id: id } }
+  // );
+  const update = db.query(query);
   return update;
 }
 
@@ -132,6 +161,12 @@ async function alocarEditarRamalServidor(idRamal, matricula, senha) {
     if (!servidor.dataValues.RamalV) {
       const ramal = await RamalV.findOne({ where: { id: idRamal } });
       servidor.setRamalV(ramal);
+      if (servidor.dataValues.matricula != "0000000") {
+        await ramal.update(
+          { disponibilidade: 1 },
+          { where: { id: idRamal } }
+        );
+      }
     }
     //se não, alocar ramal a esse servidor
   }
@@ -141,11 +176,11 @@ async function alocarEditarRamalServidor(idRamal, matricula, senha) {
 async function liberarRamal(id, controle) {
   if (controle == "1") {
     return await db.query(
-      `UPDATE ramalF SET Setor_id = 1, bastidor = "", terminacao = "", slot = "", tipo = "analógico", grupo = "", categoria = "", observacao = ""  WHERE id = ${id}`
+      `UPDATE ramalF SET Setor_id = 1, bastidor = "", terminacao = "", slot = "", tipo = "analógico", grupo = "", categoria = "", observacao = "", disponibilidade = 0  WHERE id = ${id}`
     );
   } else if (controle == "0") {
     return await RamalV.update(
-      { Servidor_matricula: "0000000" },
+      { Servidor_matricula: "0000000", disponibilidade: 0 },
       { where: { id: id } }
     );
   }

@@ -31,6 +31,7 @@ module.exports = {
       Servidor_matricula VARCHAR(45) NOT NULL,
       numero VARCHAR(45) NOT NULL,
       senha VARCHAR(45) NOT NULL,
+      disponibilidade INT,
       PRIMARY KEY (id, Servidor_matricula),
       
       CONSTRAINT fk_RamalV_Servidor
@@ -60,6 +61,7 @@ module.exports = {
       grupo VARCHAR(45) NULL,
       categoria VARCHAR(45) NULL,
       observacao VARCHAR(45) NULL,
+      disponibilidade INT,
       PRIMARY KEY (id, Setor_id),
       INDEX fk_RamalF_Setor (Setor_id ASC) VISIBLE,
       CONSTRAINT fk_RamalF_Setor

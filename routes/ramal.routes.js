@@ -8,12 +8,18 @@ const {
   retornarRamais,
   alocarEditarRamalFisico,
   alocarEditarRamalServidor,
-  liberarRamal
+  liberarRamal,
 } = require("../controllers/ramalQuerys.controller");
 const { listaSetores } = require("../controllers/setorQuery.controller");
-const { listaServidores, allChefes } = require("../controllers/servidores.controler");
+const {
+  listaServidores,
+  allChefes,
+} = require("../controllers/servidores.controler");
 const db = require("../models/db");
 const Setor = require("../models/Setor");
+const RamalF = require("../models/RamalF");
+const { where } = require("sequelize");
+const Servidor = require("../models/Servidor");
 
 router.get("/alocar", async (req, res) => {
   res.render("ramal/alocar");
@@ -58,17 +64,19 @@ router.post("/add-ramal-v", async (req, res) => {
 
 router.get("/home", async (req, res) => {
   const [ramaisF, ramaisV] = await retornarRamais();
-  const chefes = await allChefes()
+  const chefes = await allChefes();
   //definir chefe cada ramalV que a matricula esta na allChefes()
   // console.log(chefes)
   const setores = await listaSetores();
-  ramaisV.forEach((e)=>{
-    if(chefes.includes(e.Servidor_matricula)){
-      e.chefia = 1
-    }else{
-      e.chefia = 0
+  ramaisV.forEach((e) => {
+    if (chefes) {
+      if (chefes.includes(e.Servidor_matricula)) {
+        e.chefia = 1;
+      } else {
+        e.chefia = 0;
+      }
     }
-  })
+  });
   // console.log(ramaisV)
   res.render("ramal/home", { ramaisF, ramaisV, setores });
 });
@@ -117,13 +125,12 @@ router.get("/editar-:id-:controle", async (req, res) => {
   res.render("ramal/editar-ramal", { ramal, tipo, setores, servidores });
 });
 
-
 router.post("/editar-:id-virtual", async (req, res) => {
-  const {matricula, senha} = req.body;
+  const { matricula, senha } = req.body;
   const { id } = req.params;
   //alocar ramal ao servidor
-  console.log(id)
-  await alocarEditarRamalServidor(id, matricula, senha)
+  console.log(id);
+  await alocarEditarRamalServidor(id, matricula, senha);
   res.redirect("/home");
 });
 
@@ -157,6 +164,28 @@ router.post("/editar-:id-fisico", async (req, res) => {
 router.get("/liberar-:id-:controle", async (req, res) => {
   console.log(req.params);
   await liberarRamal(req.params.id, req.params.controle);
+  res.redirect("/home");
+});
+
+// ########## FILTRO ####################
+router.post("/ramais/filtro", async (req, res) => {
+  // const { disponibilidade, modelo, setor, matricula, numero } = req.body
+  // const tempObj = new Object;
+
+  // // console.log(tempObj)
+  // if (modelo == "virtual"){
+  //   //só o que vai importar é: disponibilidade, matricula e numero
+  //   for (const e in req.body){
+  //     if (req.body[e] != "" && e != "setor"){
+  //       tempObj[e] = req.body[e]
+  //     }
+  //   }
+  //   console.log(tempObj);
+  // }
+  // const ramal = await RamalF.findAll({where: tempObj})
+  // console.log(ramal)
+  // const ramais = await retornarRamais(null, disponibilidade, null, modelo,  setor, servidor, matricula, numero)
+  // console.log(ramais)
   res.redirect("/home");
 });
 

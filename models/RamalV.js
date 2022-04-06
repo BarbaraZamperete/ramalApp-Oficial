@@ -10,6 +10,7 @@ const RamalV = db.define(
       primaryKey: true,
     },
     senha: Sequelize.STRING(50),
+    disponibilidade: Sequelize.INTEGER,
   },
   {
     timestamps: false,

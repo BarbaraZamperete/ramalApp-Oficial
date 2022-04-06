@@ -16,6 +16,7 @@ const RamalF = db.define(
     grupo: Sequelize.STRING(30),
     categoria: Sequelize.STRING(15),
     observacao: Sequelize.STRING(250),
+    disponibilidade: Sequelize.INTEGER,
   },
   {
     timestamps: false,

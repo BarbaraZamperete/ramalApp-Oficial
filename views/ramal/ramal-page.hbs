@@ -51,6 +51,15 @@
                     <h4>Observações: </h4>
                     <h4>{{ramal.observacao}}</h4>
                 </div>
+                {{!-- <div class="data-ramal">
+                    <h4>Disponibilidade: </h4>
+                    {{#ifCond ramal.disponibilidade "==" 0}}
+                    <h4>Livre</h4>
+                    {{/ifCond}}
+                    {{#ifCond ramal.disponibilidade "==" 1}}
+                    <h4>Ocupado</h4>
+                    {{/ifCond}}
+                </div> --}}
             </div>
             {{else}}
             <div class="data-virtual">
