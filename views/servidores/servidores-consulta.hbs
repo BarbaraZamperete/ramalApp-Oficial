@@ -1,1 +1,40 @@
-<h1>consultar servidor</h1>
+<section class="consulta-container">
+    <div class="consulta">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquise por servidores...">
+        <ul id="myUL">
+            {{#each servidorList}}
+            <li><a href="#">{{nome}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="consulta">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquise por matriculas...">
+
+        <ul id="myUL">
+            {{#each servidorList}}
+            <li><a href="#">{{matricula}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</section>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>

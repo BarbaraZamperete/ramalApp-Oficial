@@ -20,6 +20,7 @@ const Setor = require("../models/Setor");
 const RamalF = require("../models/RamalF");
 const { where } = require("sequelize");
 const Servidor = require("../models/Servidor");
+const RamalV = require("../models/RamalV");
 
 router.get("/alocar", async (req, res) => {
   res.render("ramal/alocar");
@@ -60,26 +61,100 @@ router.post("/add-ramal-v", async (req, res) => {
   res.redirect("/home");
 });
 
-//############### EXIBIR RAMAIS
+//############### EXIBIR RAMAIS #################################
+// ###############################################################
+// ###############################################################
+// ###############################################################
+// ###############################################################
 
 router.get("/home", async (req, res) => {
-  const [ramaisF, ramaisV] = await retornarRamais();
-  const chefes = await allChefes();
-  //definir chefe cada ramalV que a matricula esta na allChefes()
-  // console.log(chefes)
   const setores = await listaSetores();
-  ramaisV.forEach((e) => {
-    if (chefes) {
-      if (chefes.includes(e.Servidor_matricula)) {
-        e.chefia = 1;
-      } else {
-        e.chefia = 0;
+  const chefes = await allChefes();
+  //se não tem nenhum filtro
+  let filtros = 0
+  if (!req.session.filtro) {
+    const [ramaisF, ramaisV] = await retornarRamais();
+    //define os ramais de chefes
+    ramaisV.forEach((e) => {
+      if (chefes) {
+        if (chefes.includes(e.Servidor_matricula)) {
+          e.chefia = 1;
+        } else {
+          e.chefia = 0;
+        }
       }
+    });
+    res.render("ramal/home", { ramaisF, ramaisV, setores, filtros });
+
+    //se tem filtro
+  } else {
+    filtros = 1
+    // transforma o filtro em query
+    let filtroData = req.session.filtro
+    const query = Object.keys(req.session.filtro)
+      .map((key) => `${key}="${req.session.filtro[key]}"`)
+      .join("&");
+
+    //se o filtro é do tipo FISICO
+    if (req.session.filtroTipo == "fisico") {
+      const [ramaisF] = await db.query(
+        `SELECT id, numero, disponibilidade FROM ramalF WHERE ${query}`
+      );
+      res.render("ramal/home", { ramaisF, setores, filtros });
+
+      //se o filtro é do tipo virtual
+    } else if (req.session.filtroTipo == "virtual") {
+      const ramais = await RamalV.findAll({ where: req.session.filtro });
+      const ramaisV = [];
+      ramais.forEach((ramal) => {
+        ramaisV.push(ramal.dataValues);
+      });
+      res.render("ramal/home", { ramaisV, setores, filtros });
+
+      //se o filtro não é fisico nem virtual, ou seja: QUALQUER
+    } else {
+      const queryFiltroSemTipo = {};
+      // se o tipo é qualquer, verifica se há filtro de NUMERO e de DISPONIBILIDADE
+      if (req.session.filtro.numero && (req.session.filtro.disponibilidade==1 || req.session.filtro.disponibilidade==0)) {
+        //se tiver filtra pelos dois os dois tipos de ramais
+        queryFiltroSemTipo.numero = req.session.filtro.numero;
+        queryFiltroSemTipo.disponibilidade = req.session.filtro.disponibilidade;
+      } else {
+        //se não tem os dois, verifica se tem o filtro de disponibilidade
+        if (req.session.filtro.disponibilidade == 0 || req.session.filtro.disponibilidade == 1) {
+          queryFiltroSemTipo.disponibilidade = req.session.filtro.disponibilidade;
+          //se não tem o de disponibilidade, verifica se tem o de numero
+        } else if (req.session.filtro.numero) {
+          queryFiltroSemTipo.numero = req.session.filtro.numero;
+        }
+      }
+      //aplica a busca de acordo com a QueryFiltroSemTipo
+      const ramalF = await RamalF.findAll({
+        where: queryFiltroSemTipo,
+      });
+      const ramalV = await RamalV.findAll({
+        where: queryFiltroSemTipo,
+      });
+      const ramaisV = [];
+      ramalV.forEach((ramal) => {
+        ramaisV.push(ramal.dataValues);
+      });
+      const ramaisF = [];
+      ramalF.forEach((ramal) => {
+        ramaisF.push(ramal.dataValues);
+      });
+      res.render("ramal/home", { ramaisV, ramaisF, setores, filtros });
     }
-  });
-  // console.log(ramaisV)
-  res.render("ramal/home", { ramaisF, ramaisV, setores });
+  }
+  req.session.filtro = null;
+  req.session.filtroTipo = null;
 });
+
+// ###############################################################
+// ###############################################################
+// ###############################################################
+// ###############################################################
+// ###############################################################
 
 //############### PAGINA DO RAMAL
 router.get("/ramal-:id-:tipo", async (req, res) => {
@@ -129,7 +204,6 @@ router.post("/editar-:id-virtual", async (req, res) => {
   const { matricula, senha } = req.body;
   const { id } = req.params;
   //alocar ramal ao servidor
-  console.log(id);
   await alocarEditarRamalServidor(id, matricula, senha);
   res.redirect("/home");
 });
@@ -157,36 +231,67 @@ router.post("/editar-:id-fisico", async (req, res) => {
     categoria,
     observacao
   );
-  console.log(update);
   res.redirect("/home");
 });
 
 router.get("/liberar-:id-:controle", async (req, res) => {
-  console.log(req.params);
   await liberarRamal(req.params.id, req.params.controle);
   res.redirect("/home");
 });
 
 // ########## FILTRO ####################
 router.post("/ramais/filtro", async (req, res) => {
-  // const { disponibilidade, modelo, setor, matricula, numero } = req.body
-  // const tempObj = new Object;
+  const { disponibilidade, modelo, setor, matricula, numero } = req.body;
+  const camposFiltrar = new Object();
+  if (numero != "") {
+    camposFiltrar.numero = numero;
+  }
+  if (disponibilidade != "") {
+    camposFiltrar.disponibilidade = parseInt(disponibilidade);
+  }
+  //se for virtual
+  if (modelo == "virtual") {
+    if (matricula != "") {
+      camposFiltrar.matricula = matricula;
+    }
 
-  // // console.log(tempObj)
-  // if (modelo == "virtual"){
-  //   //só o que vai importar é: disponibilidade, matricula e numero
-  //   for (const e in req.body){
-  //     if (req.body[e] != "" && e != "setor"){
-  //       tempObj[e] = req.body[e]
-  //     }
-  //   }
-  //   console.log(tempObj);
-  // }
-  // const ramal = await RamalF.findAll({where: tempObj})
-  // console.log(ramal)
-  // const ramais = await retornarRamais(null, disponibilidade, null, modelo,  setor, servidor, matricula, numero)
-  // console.log(ramais)
-  res.redirect("/home");
+    req.session.filtro = camposFiltrar;
+    req.session.filtroTipo = "virtual";
+    res.redirect("/home");
+  }
+  //se for FISICO
+  else if (modelo != "virtual" && modelo != "") {
+    //é ramal fisico
+    camposFiltrar.tipo = modelo;
+    if (setor != "") {
+      camposFiltrar.Setor_id = setor;
+    }
+    // const ramais = await RamalF.findAll({where: camposFiltrar});
+    // const ramaisF = ramais.dataValues
+    // res.render("ramal/home", {ramaisF, setores})
+    req.session.filtro = camposFiltrar;
+    req.session.filtroTipo = "fisico";
+    res.redirect("/home");
+  }
+  //Se for qualquer tipo: fisico e virtual
+  else {
+    // const ramalF = await RamalF.findAll({where: camposFiltrar})
+    // const ramalV = await RamalV.findAll({where: camposFiltrar})
+    // const ramaisV = []
+    // const ramaisF = []
+    // ramalF.forEach((ramal) => {
+    //   ramaisF.push(ramal.dataValues)
+    // })
+    // ramalV.forEach((ramal) => {
+    //   ramaisV.push(ramal.dataValues)
+    // })
+    req.session.filtro = camposFiltrar;
+    if (numero == "" && disponibilidade == "") {
+      req.session.filtro = null;
+    }
+    req.session.filtroTipo = null;
+    res.redirect("/home");
+  }
 });
 
 module.exports = router;

@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-.login-container label{
+.login-container label {
     font-size: 20px;
     align-self: flex-start;
     margin-bottom: 5px;
@@ -71,7 +71,8 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.ramal-form-edit{
+
+.ramal-form-edit {
     border-radius: 10px;
 }
 
@@ -110,7 +111,8 @@
     color: white;
     letter-spacing: 1px;
 }
-#add-virtual{
+
+#add-virtual {
     width: 50%;
 }
 
@@ -159,38 +161,46 @@
 
 
 /*Menu lateral*/
-.menu-lateral{
+.menu-lateral {
     /* position: absolute; */
     margin-left: 40px;
     margin-right: 20px;
     margin-top: 30px;
-    min-width: 250px;
+    width: 250px;
     background-color: #1e4072;
     color: white;
     border-radius: 10px;
     padding-right: 10px;
     padding-left: 10px;
 }
-.filtrar-titulo h2{
+
+.filtrar-titulo h2 {
     font-weight: 400;
     margin-left: 5px;
 }
-.menu-lateral form{
+
+.menu-lateral form {
     align-items: flex-start;
     font-size: 18px;
     /* align-items: center; */
 }
-.menu-lateral form select, form input {
+
+.menu-lateral>form>div {
     width: 100%;
-    margin-bottom: 10px;  
+}
+
+.menu-lateral form select, .menu-lateral form input {
+    width: 100%;
+    margin-bottom: 10px;
     font-size: 18px;
     padding: 5px;
     border: none;
     border-radius: 6px;
     color: gray;
-     
+
 }
-.menu-lateral form input[type="submit"]{
+
+.menu-lateral form input[type="submit"] {
     background-color: #8cb1d7;
     font-size: 20px;
     color: white;
@@ -204,18 +214,32 @@
     cursor: pointer;
 }
 
+.menu-lateral button {
+    align-self: flex-end;
+    cursor: pointer;
+    background-color: #d32d4e;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /*ADD RAMAL FAIXA FISICO*/
-.faixa form{
+.faixa form {
     justify-content: flex-start;
 }
-.ramal-form form h3{
+
+.ramal-form form h3 {
     margin-top: 5px;
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: 400;
 }
-.ramais-a-add{
+
+.ramais-a-add {
     max-height: 180px;
     min-height: 180px;
     width: 500px;
@@ -230,7 +254,7 @@
     justify-content: center;
 }
 
-.ramal-list{
+.ramal-list {
     display: flex;
     align-items: center;
     color: white;
@@ -242,7 +266,8 @@
     margin-right: 10px;
     /* background-color: rgb(32, 71, 32); */
 }
-.ramal-list h4{
+
+.ramal-list h4 {
     font-size: 22px;
     font-weight: 400;
 }
@@ -250,12 +275,13 @@
 
 /* RAMAL PAGE #########################*/
 
-.container-ramal-page{
+.container-ramal-page {
     display: flex;
     flex-direction: column;
     max-width: 800px;
     margin: 100px auto;
 }
+
 .ramal-page {
     width: 100%;
     min-height: 500px;
@@ -265,15 +291,16 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    
+
 }
 
-.titulo{
+.titulo {
     padding: 10px;
     margin: 10px;
-    
+
 }
-.titulo a span, .titulo a{
+
+.titulo a span, .titulo a {
     font-size: 40px;
     color: white;
     text-decoration: none;
@@ -283,36 +310,40 @@
     letter-spacing: 1px;
 }
 
-.area-data{
+.area-data {
     display: flex;
     justify-content: center;
 }
-.metade-data{
+
+.metade-data {
     display: flex;
     flex-direction: column;
     flex: 1;
     /* background-color: red; */
 }
-.data-virtual{
+
+.data-virtual {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 80%;
     height: 300px;
-    
+
 }
-.data-virtual .data-ramal{
+
+.data-virtual .data-ramal {
     width: 100%;
 }
-.data-ramal{
+
+.data-ramal {
     display: flex;
     justify-content: space-between;
     margin: 0px 10px 0px 10px;
-    
+
 }
 
-.data-ramal h4{
+.data-ramal h4 {
     font-weight: 400;
     font-size: 20px;
     text-transform: uppercase;
@@ -321,20 +352,22 @@
     margin: 10px;
 }
 
-span.separador{
+span.separador {
     height: 300px;
     width: 2px;
     background-color: #8cb1d7;
     margin: 10px;
 }
-.buttons-area{
+
+.buttons-area {
     justify-self: flex-end;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
     min-height: 100%;
 }
-.buttons-area button{
+
+.buttons-area button {
     width: 200px;
     background-color: #ffffff;
     text-transform: uppercase;
@@ -350,3 +383,69 @@ span.separador{
 
 /*############# setorrrrrrr ######*/
 
+
+
+/* $############# CONSULTAR SERVIDORESS #################*/
+
+.consulta-container{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.consulta{
+    width: 300px;
+    margin: 30px;
+}
+
+
+#myInput {
+    background-image: url('/css/searchicon.png');
+    /* Add a search icon to input */
+    background-position: 10px 12px;
+    /* Position the search icon */
+    background-repeat: no-repeat;
+    /* Do not repeat the icon image */
+    width: 100%;
+    /* Full-width */
+    font-size: 16px;
+    /* Increase font-size */
+    padding: 12px 20px 12px 40px;
+    /* Add some padding */
+    border: 1px solid #ddd;
+    /* Add a grey border */
+    margin-bottom: 12px;
+    /* Add some space below the input */
+}
+
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd;
+    /* Add a border to all links */
+    margin-top: -1px;
+    /* Prevent double borders */
+    background-color: #f6f6f6;
+    /* Grey background color */
+    padding: 12px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove default text underline */
+    font-size: 18px;
+    /* Increase the font-size */
+    color: black;
+    /* Add a black text color */
+    display: block;
+    /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+    /* Add a hover effect to all links, except for headers */
+}

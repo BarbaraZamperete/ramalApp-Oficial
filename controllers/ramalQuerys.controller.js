@@ -186,6 +186,9 @@ async function liberarRamal(id, controle) {
   }
 }
 
+
+
+
 module.exports = {
   adicionarRamal,
   removerRamal,

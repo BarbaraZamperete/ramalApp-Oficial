@@ -8,41 +8,58 @@
     <label for="disponibilidade">Disponibilidade</label>
     <select name="disponibilidade" id="disponibilidade">
       <option value="">Qualquer</option>
-      <option value="1" id="1">Livre</option>
-      <option value="0" id="0">Ocupado</option>
+      <option value="0" id="0">Livre</option>
+      <option value="1" id="1">Ocupado</option>
     </select>
     <label for="modelo">Modelo de Ramal</label>
     <select name="modelo" id="modelo">
       <option value="">Qualquer</option>
-      <option value="analogico" id="analogico">Analógico</option>
+      <option value="analógico" id="analogico">Analógico</option>
       <option value="digital" id="digital">Digital</option>
       <option value="virtual" id="virtual">Virtual</option>
       <option value="ip" id="ip">IP</option>
     </select>
     {{!-- {{/if}} --}}
-    <label for="setor">Setor:</label>
-    <select name="setor" id="">
+    <div id="fisico-area" class="hide">
+      <label for="setor">Setor:</label>
+      <select name="setor" id="">
         <option value="">Qualquer</option>
         {{#each setores}}
         <option value="{{id}}">{{nome}}</option>
         {{/each}}
-    </select>
-    <label for="matricula">Matricula:</label>
-    <input type="search" name="matricula" id="" />
+      </select>
+    </div>
+    <div id="virtual-area" class="hide">
+      <label for="matricula">Matricula:</label>
+      <input type="search" name="matricula" id="" />
+    </div>
     <label for="numero">Número:</label>
     <input type="search" name="numero" id="" />
     <input type="submit" value="Filtrar" />
+    {{#if filtros}}
+    <button onclick="resetarFiltros"><span class="material-icons">&#xe14c;</span>Limpar Filtros</button>
+    {{/if}}
   </form>
 </div>
-{{#if tipo}}
-  <script>
-    const campoTipo = document.getElementById("{{tipo}}");
-    campoTipo.setAttribute("selected", "true");
-  </script>
-{{/if}}
-{{#if disponibilidade}}
-  <script>
-    const campoDisponibilidade = document.getElementById("{{disponibilidade}}");
-    campoDisponibilidade.setAttribute("selected", "true");
-  </script>
-{{/if}}
+
+<script>
+  const campoVirtual = document.getElementById("virtual-area")
+  const campoFisico = document.getElementById("fisico-area")
+  const modelo = document.getElementById("modelo")
+  modelo.addEventListener("change", (e)=> {
+    console.log(e.target.value)
+    if(e.target.value == "virtual"){
+      campoVirtual.classList.remove("hide")
+      campoFisico.classList.add('hide')
+    }else if(e.target.value != ""){
+      campoVirtual.classList.add("hide")
+      campoFisico.classList.remove('hide')
+    }else{
+      campoVirtual.classList.add("hide")
+      campoFisico.classList.add('hide')
+    }
+  })
+  function resetarFiltros(){
+    location.assign("/home")
+  }
+</script>

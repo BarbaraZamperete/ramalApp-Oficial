@@ -136,6 +136,7 @@ body {
     width: 95%;
     border-radius: 10px;
     padding: 10px;
+    flex-wrap: wrap;
     /* background-color: whitesmoke; */
 }
 

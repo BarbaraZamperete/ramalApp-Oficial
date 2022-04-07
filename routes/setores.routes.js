@@ -10,7 +10,7 @@ const {
 const async = require("hbs/lib/async");
 
 router.get("/search-setor", async (req, res) => {
-  const allSetores = await Setor.findAll();
+  const allSetores = await Setor.findAll({order: [['nome', 'ASC']]});
   const setoresLista = [];
   allSetores.forEach((setor) => {
     setoresLista.push(setor.dataValues);

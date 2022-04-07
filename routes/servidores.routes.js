@@ -4,12 +4,19 @@ const {
 const router = Router();
 const sequelize = require('sequelize');
 const {listaSetores} = require("../controllers/setorQuery.controller")
-const { addServidor } = require("../controllers/servidores.controler")
+const { addServidor } = require("../controllers/servidores.controler");
+const Servidor = require('../models/Servidor');
 
 
 
-router.get("/search-servidor", (req, res) => {
-    res.render('servidores/servidores-consulta')
+router.get("/search-servidor", async (req, res) => {
+    const allServidores = await Servidor.findAll()
+    const servidorList = []
+    allServidores.forEach((servidor)=> {
+        if(servidor.dataValues.matricula != "0000000")
+        servidorList.push(servidor.dataValues)
+    })
+    res.render('servidores/servidores-consulta', {servidorList})
 })
 
 
